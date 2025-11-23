@@ -360,3 +360,26 @@ git push
 - Template sections for different note types
 - Git-friendly for version control
 - Integrates with existing documentation
+
+## NOTES.md Update - Vulkan Resources
+```bash
+# Check git status for changes
+git status
+
+# Check what changes were made to NOTES.md
+git diff NOTES.md
+
+# Format code before commit
+zig fmt src/
+
+# Commit and push NOTES.md updates
+git add .
+git commit -m "docs: add Vulkan learning resources to NOTES.md"
+git push
+```
+
+## Resources Added to NOTES.md
+- Similar useful project: https://github.com/spanzeri/vkguide-zig/blob/main/src/VulkanEngine.zig
+- Vulkan guide: https://vkguide.dev/docs/new_chapter_0/code_walkthrough/
+- Official Vulkan tutorial: https://vulkan-tutorial.com/
+- Rust version of Vulkan tutorial: https://kylemayes.github.io/vulkanalia/
