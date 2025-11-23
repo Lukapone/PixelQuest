@@ -340,3 +340,23 @@ git push
 - Include formatting in commit workflow
 - Zig fmt follows official Zig style guidelines automatically
 - No manual formatting needed - let zig fmt handle consistency
+
+## NOTES.md Creation
+```bash
+# Create NOTES.md file with note-taking template
+cat > NOTES.md << 'EOF'
+[Template content]
+EOF
+
+# Commit and push NOTES.md
+git add NOTES.md
+git commit -m "docs: add NOTES.md for development note-taking"
+git push
+```
+
+## NOTES.md Features
+- Follows project naming convention (ALL CAPS)
+- Markdown format for rich formatting
+- Template sections for different note types
+- Git-friendly for version control
+- Integrates with existing documentation
