@@ -318,3 +318,25 @@ git push
 - Changed `zig-cache/` to `.zig-cache/` to match actual directory name
 - This ensures zig-cache files are properly ignored
 - Important for keeping build artifacts out of repository
+
+## Zig Format Integration
+```bash
+# Format all Zig source files before commit
+zig fmt src/
+
+# Check formatting results
+git status
+
+# Stage and commit with formatted code
+git add .
+git commit -m "docs: add zig fmt requirement to commit workflow and format existing code"
+git push
+```
+
+## Code Formatting Policy
+- ALWAYS run `zig fmt` before every commit
+- Use `zig fmt src/` to format all source files
+- Check git status to see formatting changes
+- Include formatting in commit workflow
+- Zig fmt follows official Zig style guidelines automatically
+- No manual formatting needed - let zig fmt handle consistency
