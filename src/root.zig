@@ -8,14 +8,14 @@ pub fn gameLoop() !void {
 
     try stdout.print("Starting game loop...\n", .{});
     try stdout.print("Press Ctrl+C to exit\n", .{});
-    
+
     // Simple game loop placeholder
     var frame_count: u32 = 0;
     while (frame_count < 5) {
         try stdout.print("Frame {d}: Game running\n", .{frame_count});
         frame_count += 1;
     }
-    
+
     try stdout.print("Game loop ended. Ready for implementation!\n", .{});
     try stdout.flush();
 }

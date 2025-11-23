@@ -17,6 +17,13 @@
 - Use doc comments (`//!`) for module documentation
 - Use regular comments (`//`) for implementation details
 
+## Code Formatting
+- ALWAYS run `zig fmt` before every commit
+- Use `zig fmt` to format all Zig source files automatically
+- Check formatting results with `git status` after running
+- Zig fmt follows official Zig style guidelines
+- No manual formatting needed - let zig fmt handle it
+
 ## Project Structure
 - `src/main.zig` - Entry point with main() function
 - `src/root.zig` - Core game logic and library exports
@@ -41,6 +48,7 @@
 - Example: "feat: add player movement system"
 - Keep commits small and focused
 - Test before committing: `zig build test`
+- Format code before committing: `zig fmt`
 
 ## Git Commands for Agents
 - `git status` - Check working tree status
@@ -87,3 +95,4 @@
 - COMMANDS.md updates should be included with main commit, not separate commits
 - Use `git add .` to include both main changes and COMMANDS.md updates together
 - Commands in output are shown in bash tool descriptions for clarity
+- Always include `zig fmt` in commit workflow documentation
