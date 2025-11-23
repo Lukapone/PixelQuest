@@ -299,3 +299,22 @@ git push
 - Use `zig build --help` for build system options
 - Pay attention to descriptive compiler error messages
 - Refer to Ziglings for learning: https://ziglings.org/
+
+## .gitignore Fix
+```bash
+# Check git status for changes
+git status
+
+# Check what changes were made to .gitignore
+git diff .gitignore
+
+# Commit and push .gitignore fix
+git add .gitignore
+git commit -m "fix: correct .gitignore pattern from zig-cache/ to .zig-cache/"
+git push
+```
+
+## .gitignore Issue Fixed
+- Changed `zig-cache/` to `.zig-cache/` to match actual directory name
+- This ensures zig-cache files are properly ignored
+- Important for keeping build artifacts out of repository
