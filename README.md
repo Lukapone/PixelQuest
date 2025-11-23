@@ -39,20 +39,6 @@ PixelQuest is a learning project for developing games using Zig. This project se
    zig build test
    ```
 
-## Project Structure
-
-```
-PixelQuest/
-├── src/
-│   ├── main.zig      # Game entry point
-│   └── root.zig      # Core game logic
-├── build.zig         # Build configuration
-├── build.zig.zon     # Project metadata
-├── AGENTS.md         # Development guidelines
-├── commands.md       # Command history and reference
-└── README.md         # This file
-```
-
 ## Development
 
 ### Build Commands
