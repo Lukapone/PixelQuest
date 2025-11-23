@@ -74,3 +74,54 @@ zig fmt src/
 - Add input handling
 - Implement game state management
 - Add game objects and physics
+
+## Git Setup Commands
+```bash
+# Initialize git repository
+git init
+
+# Create .gitignore file
+cat > .gitignore << 'EOF'
+# Zig build artifacts
+zig-out/
+zig-cache/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.log
+
+# Executable
+PixelQuest
+EOF
+
+# Check git configuration
+git config --global user.name
+git config --global user.email
+
+# Add all files to git
+git add .
+
+# Create initial commit
+git commit -m "Initial commit: PixelQuest Zig game project setup with .gitignore"
+
+# Verify setup
+git status
+git log --oneline
+```
+
+## Git Status After Setup
+✅ Git repository initialized
+✅ .gitignore created and working
+✅ Initial commit made
+✅ zig-cache properly ignored
+✅ All project files committed

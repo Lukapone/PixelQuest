@@ -34,3 +34,30 @@
 - Separate game logic from rendering
 - Consider using Zig's comptime for game constants
 - Memory management: prefer arena allocators for game state
+
+## Git Workflow Guidelines
+- Use conventional commit messages: "type: description"
+- Types: feat, fix, docs, style, refactor, test, chore
+- Example: "feat: add player movement system"
+- Keep commits small and focused
+- Test before committing: `zig build test`
+
+## Git Commands for Agents
+- `git status` - Check working tree status
+- `git add .` - Stage all changes
+- `git commit -m "message"` - Create commit
+- `git log --oneline` - Show commit history
+- `git diff` - Show unstaged changes
+- `git diff --staged` - Show staged changes
+
+## Branching Strategy
+- `main` - Stable production code
+- `develop` - Integration branch
+- `feature/*` - New features
+- `fix/*` - Bug fixes
+
+## Git Ignore Patterns
+- Never commit zig-cache/ or zig-out/
+- Ignore OS-specific files (.DS_Store)
+- Ignore IDE files (.vscode/, .idea/)
+- Ignore temporary files (*.tmp, *.log)
