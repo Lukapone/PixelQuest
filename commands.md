@@ -212,3 +212,11 @@ git push
 - Development commands reference
 - Learning resources links
 - Contributing guidelines
+
+## README.md Update
+```bash
+# Remove project structure section from README.md
+git add README.md
+git commit -m "docs: remove project structure section from README.md"
+git push
+```
