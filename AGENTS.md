@@ -61,3 +61,19 @@
 - Ignore OS-specific files (.DS_Store)
 - Ignore IDE files (.vscode/, .idea/)
 - Ignore temporary files (*.tmp, *.log)
+
+## GitHub CLI Usage
+- Install with `brew install gh` on macOS
+- Authenticate with `gh auth login` (requires browser)
+- Create repos with `gh repo create <name> --public --source=. --push`
+- Always record GitHub CLI commands in commands.md
+- Use `gh --help` for available commands
+
+## Terminal Command Documentation Policy
+- ALL terminal commands must be recorded in commands.md
+- Include command purpose and expected output
+- Group commands by functionality (setup, development, deployment)
+- Use code blocks for command formatting
+- Include verification commands after setup
+- Document any troubleshooting steps
+- Update both commands.md and AGENTS.md when adding new tooling

@@ -125,3 +125,42 @@ git log --oneline
 ✅ Initial commit made
 ✅ zig-cache properly ignored
 ✅ All project files committed
+
+## GitHub CLI Installation and Setup
+```bash
+# Install GitHub CLI
+brew install gh
+
+# Verify installation
+gh --version
+
+# Check authentication status
+gh auth status
+
+# Authenticate with GitHub (requires browser)
+gh auth login
+
+# Create repository and push
+gh repo create PixelQuest --public --description "A Zig-based game learning project" --source=. --push
+```
+
+## GitHub CLI Commands Reference
+```bash
+# List repositories
+gh repo list
+
+# Create new repository
+gh repo create <repo-name> --public/--private
+
+# Clone repository
+gh repo clone <username>/<repo-name>
+
+# Create issue
+gh issue create --title "Title" --body "Description"
+
+# Create pull request
+gh pr create --title "Title" --body "Description"
+
+# View repository info
+gh repo view
+```
