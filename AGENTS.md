@@ -70,10 +70,10 @@
 - Use `gh --help` for available commands
 
 ## Terminal Command Documentation Policy
-- ALL terminal commands must be recorded in commands.md
+- ALL terminal commands must be recorded in COMMANDS.md
 - Include command purpose and expected output
 - Group commands by functionality (setup, development, deployment)
 - Use code blocks for command formatting
 - Include verification commands after setup
 - Document any troubleshooting steps
-- Update both commands.md and AGENTS.md when adding new tooling
+- Update both COMMANDS.md and AGENTS.md when adding new tooling
