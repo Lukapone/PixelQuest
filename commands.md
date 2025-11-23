@@ -220,3 +220,30 @@ git add README.md
 git commit -m "docs: remove project structure section from README.md"
 git push
 ```
+
+## Zig Cache Removal from Git
+```bash
+# Check if zig-cache files are tracked
+git ls-files | grep zig-cache
+
+# Remove zig-cache from git tracking and delete local directory
+git rm -r --cached .zig-cache
+rm -rf .zig-cache
+
+# Check git status (should show deletions staged)
+git status
+
+# Commit and push the removal
+git commit -m "fix: remove zig-cache from git tracking and local directory"
+git push
+
+# Verify zig-cache files are no longer tracked
+git ls-files | grep zig-cache
+```
+
+## Final Status
+✅ zig-cache completely removed from git tracking
+✅ Local zig-cache directory deleted
+✅ .gitignore properly configured to prevent future commits
+✅ All changes pushed to GitHub
+✅ Repository now clean without build artifacts
