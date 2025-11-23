@@ -96,3 +96,5 @@
 - Use `git add .` to include both main changes and COMMANDS.md updates together
 - Commands in output are shown in bash tool descriptions for clarity
 - Always include `zig fmt` in commit workflow documentation
+- ONLY update COMMANDS.md when there are NEW commands not previously used
+- Do not update COMMANDS.md for routine/repeated commands
