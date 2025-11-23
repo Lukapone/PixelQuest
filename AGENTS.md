@@ -69,6 +69,13 @@
 - Always record GitHub CLI commands in commands.md
 - Use `gh --help` for available commands
 
+## Troubleshooting Guidelines
+- Always follow Zig documentation when troubleshooting issues: https://ziglang.org/learn/
+- Check Zig Language Reference for syntax and API questions: https://ziglang.org/documentation/
+- Use `zig build --help` to understand build system options
+- Check compiler error messages carefully - they are often very descriptive
+- Refer to Ziglings for learning Zig by fixing broken programs: https://ziglings.org/
+
 ## Terminal Command Documentation Policy
 - ALL terminal commands must be recorded in COMMANDS.md
 - Include command purpose and expected output
