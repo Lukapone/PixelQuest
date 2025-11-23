@@ -164,3 +164,30 @@ gh pr create --title "Title" --body "Description"
 # View repository info
 gh repo view
 ```
+
+## GitHub Repository Creation and Push
+```bash
+# Verify authentication
+gh auth status
+
+# Create repository and push
+gh repo create PixelQuest --public --description "A Zig-based game learning project" --source=. --push
+
+# Verify remote setup
+git remote -v
+
+# Commit and push documentation updates
+git add .
+git commit -m "docs: add GitHub CLI setup and command documentation policy"
+git push
+```
+
+## Repository URL
+https://github.com/Lukapone/PixelQuest
+
+## Final Status
+✅ GitHub repository created
+✅ Code pushed to remote
+✅ Remote origin configured
+✅ Documentation updates committed and pushed
+✅ All commands recorded in commands.md
