@@ -284,3 +284,18 @@ git push
 - Updated references from `commands.md` to `COMMANDS.md` in AGENTS.md
 - Fixed consistency with new filename convention
 - All documentation now properly references COMMANDS.md
+
+## AGENTS.md Troubleshooting Guidelines Update
+```bash
+# Add troubleshooting section to AGENTS.md
+git add AGENTS.md
+git commit -m "docs: add troubleshooting guidelines with Zig documentation links"
+git push
+```
+
+## Troubleshooting Guidelines Added
+- Always follow Zig documentation: https://ziglang.org/learn/
+- Check Zig Language Reference: https://ziglang.org/documentation/
+- Use `zig build --help` for build system options
+- Pay attention to descriptive compiler error messages
+- Refer to Ziglings for learning: https://ziglings.org/
