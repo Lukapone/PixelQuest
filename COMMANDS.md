@@ -265,3 +265,22 @@ git push
 - AGENTS.md - Development guidelines for AI agents
 - COMMANDS.md - Command history and reference
 - Consistent with common documentation naming standards
+
+## AGENTS.md Typo Fixes
+```bash
+# Check git status for changes
+git status
+
+# Check what changes were made
+git diff AGENTS.md
+
+# Commit and push typo fixes
+git add AGENTS.md
+git commit -m "docs: fix typos in AGENTS.md - update commands.md references to COMMANDS.md"
+git push
+```
+
+## Changes Made
+- Updated references from `commands.md` to `COMMANDS.md` in AGENTS.md
+- Fixed consistency with new filename convention
+- All documentation now properly references COMMANDS.md
