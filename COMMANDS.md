@@ -247,3 +247,21 @@ git ls-files | grep zig-cache
 ✅ .gitignore properly configured to prevent future commits
 ✅ All changes pushed to GitHub
 ✅ Repository now clean without build artifacts
+
+## File Naming Convention Update
+```bash
+# Rename commands.md to COMMANDS.md for consistent naming
+git mv commands.md COMMANDS.md
+
+# Commit and push the rename
+git add .
+git commit -m "docs: rename commands.md to COMMANDS.md for consistent naming"
+git push
+```
+
+## Naming Convention
+- All documentation files now use CAPITAL LETTERS
+- README.md - Project documentation
+- AGENTS.md - Development guidelines for AI agents
+- COMMANDS.md - Command history and reference
+- Consistent with common documentation naming standards
