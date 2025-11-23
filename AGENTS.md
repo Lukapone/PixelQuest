@@ -86,3 +86,4 @@
 - Update both COMMANDS.md and AGENTS.md when adding new tooling
 - COMMANDS.md updates should be included with main commit, not separate commits
 - Use `git add .` to include both main changes and COMMANDS.md updates together
+- Commands in output are shown in bash tool descriptions for clarity
