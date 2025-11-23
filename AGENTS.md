@@ -84,3 +84,5 @@
 - Include verification commands after setup
 - Document any troubleshooting steps
 - Update both COMMANDS.md and AGENTS.md when adding new tooling
+- COMMANDS.md updates should be included with main commit, not separate commits
+- Use `git add .` to include both main changes and COMMANDS.md updates together
