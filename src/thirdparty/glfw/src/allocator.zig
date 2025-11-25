@@ -10,15 +10,14 @@ const prefix_size = blk: {
     break :blk n;
 };
 
-
-fn rawFromZig(buf: []align(alignment)u8, size: usize) [*]u8 {
+fn rawFromZig(buf: []align(alignment) u8, size: usize) [*]u8 {
     const pfx = @as(*usize, @ptrCast(@alignCast(buf)));
     pfx.* = size;
     return @ptrCast(buf[prefix_size..]);
 }
 
-fn zigFromRaw(memory: [*]u8) []align(alignment)u8 {
-    const ptr: [*]align(alignment)u8 = @alignCast(memory - prefix_size);
+fn zigFromRaw(memory: [*]u8) []align(alignment) u8 {
+    const ptr: [*]align(alignment) u8 = @alignCast(memory - prefix_size);
     const pfx = @as(*usize, @ptrCast(ptr));
     const content_size: usize = pfx.*;
     const full_size: usize = content_size + prefix_size;
