@@ -1,23 +1,31 @@
 //! PixelQuest - Core game logic module
 const std = @import("std");
 
-pub fn gameLoop() !void {
-    var stdout_buffer: [1024]u8 = undefined;
-    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
-    const stdout = &stdout_writer.interface;
+// Re-export window module
+pub const Window = @import("window.zig").Window;
 
-    try stdout.print("Starting game loop...\n", .{});
-    try stdout.print("Press Ctrl+C to exit\n", .{});
+pub fn gameLoop(window: *Window) !void {
+    std.debug.print("Starting game loop with window...\n", .{});
+    std.debug.print("Window size: {d}x{d}\n", .{ window.width, window.height });
+    std.debug.print("Press window close button or Ctrl+C to exit\n", .{});
 
-    // Simple game loop placeholder
+    // Main game loop
     var frame_count: u32 = 0;
-    while (frame_count < 5) {
-        try stdout.print("Frame {d}: Game running\n", .{frame_count});
+    while (!window.shouldClose()) {
+        // Poll for window events
+        Window.pollEvents();
+
+        // Simple frame counter for demonstration
         frame_count += 1;
+        if (frame_count % 60 == 0) { // Print every 60 frames (~1 second at 60 FPS)
+            const size = window.getFramebufferSize();
+            std.debug.print("Frame {d}: Window {d}x{d}\n", .{ frame_count, size.width, size.height });
+        }
+
+        // TODO: Add game logic and rendering here
     }
 
-    try stdout.print("Game loop ended. Ready for implementation!\n", .{});
-    try stdout.flush();
+    std.debug.print("Game loop ended. Window closed.\n", .{});
 }
 
 pub fn add(a: i32, b: i32) i32 {
@@ -26,9 +34,4 @@ pub fn add(a: i32, b: i32) i32 {
 
 test "basic add functionality" {
     try std.testing.expect(add(3, 7) == 10);
-}
-
-test "game loop test" {
-    // Test that gameLoop doesn't crash
-    try gameLoop();
 }
