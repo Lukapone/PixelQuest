@@ -45,7 +45,21 @@ pub fn build(b: *std.Build) void {
     });
     const run_exe_tests = b.addRunArtifact(exe_tests);
 
-    const test_step = b.step("test", "Run tests");
+    // Default test step - only runs root module tests
+    const test_step = b.step("test", "Run core module tests");
     test_step.dependOn(&run_mod_tests.step);
-    test_step.dependOn(&run_exe_tests.step);
+
+    // Additional test step for main module tests
+    const test_main_step = b.step("test-main", "Run main module tests");
+    test_main_step.dependOn(&run_exe_tests.step);
+
+    // Clean step to remove build artifacts
+    const clean_step = b.step("clean", "Remove build artifacts");
+    const clean_cmd = b.addSystemCommand(&.{
+        "rm",
+        "-rf",
+        ".zig-cache",
+        "zig-out",
+    });
+    clean_step.dependOn(&clean_cmd.step);
 }
