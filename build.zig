@@ -45,9 +45,20 @@ pub fn build(b: *std.Build) void {
     });
     const run_exe_tests = b.addRunArtifact(exe_tests);
 
-    // Default test step - only runs root module tests
-    const test_step = b.step("test", "Run core module tests");
+    // Default test step - only runs root module tests with summary
+    const test_step = b.step("test-base", "Run core module tests");
     test_step.dependOn(&run_mod_tests.step);
+
+    // Test with summary step - shows detailed output
+    const test_summary_step = b.step("test", "Run core module tests with summary");
+    const run_mod_tests_summary = b.addSystemCommand(&.{
+        "zig",
+        "build",
+        "test-base",
+        "--summary",
+        "all",
+    });
+    test_summary_step.dependOn(&run_mod_tests_summary.step);
 
     // Additional test step for main module tests
     const test_main_step = b.step("test-main", "Run main module tests");
