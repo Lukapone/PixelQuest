@@ -1,31 +1,37 @@
 //! PixelQuest - Core game logic module
 const std = @import("std");
 const glfw = @import("thirdparty/glfw/src/main.zig");
+//reexport for usage in main
+pub const logging = @import("logging.zig");
+
+const log = std.log.scoped(.game);
+const log_window = std.log.scoped(.window);
+const log_fps = std.log.scoped(.fps);
 
 /// Default GLFW error handling callback
 fn errorCallback(error_code: glfw.ErrorCode, description: [:0]const u8) void {
-    std.log.err("glfw: {}: {s}\n", .{ error_code, description });
+    log_window.err("glfw: {}: {s}", .{ error_code, description });
 }
 
 pub fn gameLoop() !void {
     // glfw.setErrorCallback(errorCallback);
     if (!glfw.init(.{})) {
-        std.log.err("failed to initialize GLFW: {?s}", .{glfw.getErrorString()});
+        log_window.err("failed to initialize GLFW: {?s}", .{glfw.getErrorString()});
         return error.GlfwInitFailed;
     }
     defer glfw.terminate();
 
     // Create our window
     const window = glfw.Window.create(800, 600, "PixelQuest", null, null, .{}) orelse {
-        std.log.err("failed to create GLFW window: {?s}", .{glfw.getErrorString()});
+        log_window.err("failed to create GLFW window: {?s}", .{glfw.getErrorString()});
         return error.WindowCreationFailed;
     };
     defer window.destroy();
 
-    std.debug.print("Starting game loop with window...\n", .{});
+    log.info("Starting game loop with window...", .{});
     const size = window.getSize();
-    std.debug.print("Window size: {d}x{d}\n", .{ size.width, size.height });
-    std.debug.print("Press window close button or Ctrl+C to exit\n", .{});
+    log.info("Window size: {d}x{d}", .{ size.width, size.height });
+    log.info("Press window close button or Ctrl+C to exit", .{});
 
     // FPS calculation variables
     var frame_count: u32 = 0;
@@ -43,7 +49,7 @@ pub fn gameLoop() !void {
         fps_timer += delta_time;
         if (fps_timer >= 1.0) {
             const fps = @as(f64, @floatFromInt(frame_count)) / fps_timer;
-            std.debug.print("FPS: {d:.1} | Frame: {d} | Total: {d}\n", .{ fps, frame_count, total_frames });
+            log_fps.info("FPS: {d:.1} | Frame: {d} | Total: {d}", .{ fps, frame_count, total_frames });
             frame_count = 0;
             fps_timer = 0.0;
         }
@@ -58,5 +64,5 @@ pub fn gameLoop() !void {
         total_frames += 1;
     }
 
-    std.debug.print("Game loop ended. Window closed.\n", .{});
+    log.info("Game loop ended. Window closed.", .{});
 }

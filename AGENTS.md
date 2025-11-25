@@ -27,6 +27,7 @@
 ## Project Structure
 - `src/main.zig` - Entry point with main() function
 - `src/root.zig` - Core game logic and library exports
+- `src/logging.zig` - Logging configuration and custom log functions
 - `build.zig` - Build configuration and dependencies
 - `build.zig.zon` - Project metadata and dependencies
 
@@ -41,6 +42,12 @@
 - Separate game logic from rendering
 - Consider using Zig's comptime for game constants
 - Memory management: prefer arena allocators for game state
+
+## Logging System
+- Use scoped logging with `std.log.scoped(.scope_name)`
+- Create appropriate scopes as necessary optimaly one per file
+- Configure log levels in `src/logging.zig` via `std_options`
+- Use appropriate log levels: .err, .warn, .info, .debug
 
 ## Git Workflow Guidelines
 - Use conventional commit messages: "type: description"

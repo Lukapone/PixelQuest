@@ -1,9 +1,11 @@
 const std = @import("std");
 const PixelQuest = @import("PixelQuest");
 
-pub fn main() !void {
-    std.debug.print("Welcome to PixelQuest! 🎮\n", .{});
-    std.debug.print("A Zig-based game learning project\n", .{});
+pub const std_options = PixelQuest.logging.std_options;
+const log = std.log.scoped(.main);
 
+pub fn main() !void {
+
+    log.info("Starting PixelQuest!", .{});
     try PixelQuest.gameLoop();
 }
