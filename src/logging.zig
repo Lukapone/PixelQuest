@@ -30,4 +30,3 @@ pub fn customLog(
     // Then print the timestamp info
     std.debug.print("    [ {s}{s}: {d} ]\n", .{ level_txt, prefix2, seconds_since_epoch });
 }
-
