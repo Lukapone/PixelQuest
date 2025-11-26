@@ -18,8 +18,8 @@
 - Use regular comments (`//`) for implementation details
 
 ## Code Formatting
-- ALWAYS run `zig fmt` before every commit
-- Use `zig fmt` to format all Zig source files automatically
+- ALWAYS run `zig fmt src/` before every commit
+- Use `zig fmt src/` to format all Zig source files automatically
 - Check formatting results with `git status` after running
 - Zig fmt follows official Zig style guidelines
 - No manual formatting needed - let zig fmt handle it
@@ -55,7 +55,7 @@
 - Example: "feat: add player movement system"
 - Keep commits small and focused
 - Test before committing: `zig build test`
-- Format code before committing: `zig fmt`
+- Format code before committing: `zig fmt src/`
 
 ## Git Commands for Agents
 - `git status` - Check working tree status
