@@ -38,6 +38,8 @@
  Rust version of vulkan tutorial:
  https://kylemayes.github.io/vulkanalia/
 
+ Zig vulkan bindings: https://github.com/Snektron/vulkan-zig/tree/zig-0.15-compat
+
 ---
 
 ## Project Goals

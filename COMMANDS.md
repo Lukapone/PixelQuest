@@ -39,30 +39,6 @@ zig build --help
 # Initialize git repository
 git init
 
-# Create .gitignore file
-cat > .gitignore << 'EOF'
-# Zig build artifacts
-zig-out/
-.zig-cache/
-
-# OS specific
-.DS_Store
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Temporary files
-*.tmp
-*.log
-
-# Executable
-PixelQuest
-EOF
-
 # Check git configuration
 git config --global user.name
 git config --global user.email
@@ -156,6 +132,27 @@ git diff --staged
 - **Language**: Zig 0.15.2+
 - **Structure**: Standard Zig module system
 - **Documentation**: README.md, AGENTS.md, COMMANDS.md, NOTES.md
+
+## Vulkan Development Setup Commands
+```bash
+# Install required Vulkan dependencies via Homebrew
+brew install glfw shaderc vulkan-validationlayers
+
+# Set Vulkan environment variables (add to .zshrc)
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+export VK_LAYER_PATH="/opt/homebrew/opt/vulkan-validationlayers/share/vulkan/explicit_layer.d"
+
+# Run Vulkan triangle example from vulkan-zig project
+cd /path/to/vulkan-zig/examples
+zig build run-triangle
+
+# Alternative: Run with environment variables inline
+DYLD_LIBRARY_PATH=/opt/homebrew/lib:$DYLD_LIBRARY_PATH VK_LAYER_PATH=/opt/homebrew/opt/vulkan-validationlayers/share/vulkan/explicit_layer.d zig build run-triangle
+```
+
+## Vulkan Environment Variables
+- **DYLD_LIBRARY_PATH**: Points to Vulkan loader libraries on macOS
+- **VK_LAYER_PATH**: Points to Vulkan validation layers for debugging
 
 ## Key Resources
 - **Zig Documentation**: https://ziglang.org/documentation/
