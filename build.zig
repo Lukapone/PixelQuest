@@ -4,11 +4,22 @@ const std = @import("std");
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
+    const use_zig_shaders = b.option(bool, "zig-shaders", "Use Zig shaders instead of GLSL") orelse false;
+
+    // Vulkan dependency
+    const vulkan = b.dependency("vulkan", .{
+        .registry = b.dependency("vulkan_headers", .{}).path("registry/vk.xml"),
+    }).module("vulkan-zig");
 
     const mod = b.addModule("PixelQuest", .{
         .root_source_file = b.path("src/root.zig"),
         .target = target,
+        .imports = &.{
+            .{ .name = "vulkan", .module = vulkan },
+        },
     });
+
+    // mod.addImport("vulkan", vulkan);
 
     const exe = b.addExecutable(.{
         .name = "PixelQuest",
@@ -19,13 +30,73 @@ pub fn build(b: *std.Build) void {
             .link_libc = true,
             .imports = &.{
                 .{ .name = "PixelQuest", .module = mod },
+                .{ .name = "vulkan", .module = vulkan },
             },
         }),
     });
 
     exe.linkSystemLibrary("glfw");
-    b.installArtifact(exe);
+    exe.linkSystemLibrary("vulkan");
 
+    // Shader compilation
+    if (use_zig_shaders) {
+        const spirv_target = b.resolveTargetQuery(.{
+            .cpu_arch = .spirv32,
+            .os_tag = .vulkan,
+            .cpu_model = .{ .explicit = &std.Target.spirv.cpu.vulkan_v1_2 },
+            .ofmt = .spirv,
+        });
+
+        const vert_spv = b.addObject(.{
+            .name = "vertex_shader",
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("src/shaders/vertex.zig"),
+                .target = spirv_target,
+            }),
+            .use_llvm = false,
+        });
+        mod.addAnonymousImport(
+            "vertex_shader",
+            .{ .root_source_file = vert_spv.getEmittedBin() },
+        );
+
+        const frag_spv = b.addObject(.{
+            .name = "fragment_shader",
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("src/shaders/fragment.zig"),
+                .target = spirv_target,
+            }),
+            .use_llvm = false,
+        });
+        mod.addAnonymousImport(
+            "fragment_shader",
+            .{ .root_source_file = frag_spv.getEmittedBin() },
+        );
+    } else {
+        const vert_cmd = b.addSystemCommand(&.{
+            "glslc",
+            "--target-env=vulkan1.2",
+            "-o",
+        });
+        const vert_spv = vert_cmd.addOutputFileArg("vert.spv");
+        vert_cmd.addFileArg(b.path("src/shaders/triangle.vert"));
+        mod.addAnonymousImport("vertex_shader", .{
+            .root_source_file = vert_spv,
+        });
+
+        const frag_cmd = b.addSystemCommand(&.{
+            "glslc",
+            "--target-env=vulkan1.2",
+            "-o",
+        });
+        const frag_spv = frag_cmd.addOutputFileArg("frag.spv");
+        frag_cmd.addFileArg(b.path("src/shaders/triangle.frag"));
+        mod.addAnonymousImport("fragment_shader", .{
+            .root_source_file = frag_spv,
+        });
+    }
+
+    b.installArtifact(exe);
     const run_step = b.step("run", "Run the app");
     const run_cmd = b.addRunArtifact(exe);
     run_step.dependOn(&run_cmd.step);
