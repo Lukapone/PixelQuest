@@ -1,7 +1,9 @@
 const std = @import("std");
 const vk = @import("vulkan");
 const c = @import("c.zig");
+const glfw = @import("../thirdparty/glfw/src/main.zig");
 const Allocator = std.mem.Allocator;
+const log = std.log.scoped(.graphics_context);
 
 const required_layer_names = [_][*:0]const u8{"VK_LAYER_KHRONOS_validation"};
 
@@ -64,9 +66,16 @@ pub const GraphicsContext = struct {
         try extension_names.append(allocator, vk.extensions.khr_portability_enumeration.name);
         try extension_names.append(allocator, vk.extensions.khr_get_physical_device_properties_2.name);
 
-        var glfw_exts_count: u32 = 0;
-        const glfw_exts = c.glfwGetRequiredInstanceExtensions(&glfw_exts_count);
-        try extension_names.appendSlice(allocator, @ptrCast(glfw_exts[0..glfw_exts_count]));
+        // var glfw_exts_count: u32 = 0;
+        // const glfw_exts = c.glfwGetRequiredInstanceExtensions(&glfw_exts_count);
+        // try extension_names.appendSlice(allocator, @ptrCast(glfw_exts[0..glfw_exts_count]));
+        // const glfw_exts = glfw.getRequiredInstanceExtensions();
+        if (glfw.getRequiredInstanceExtensions()) |glfw_exts| {
+            try extension_names.appendSlice(allocator, glfw_exts);
+        } else {
+            log.info("NoExtensionsAvailable on the GPU", .{});
+            // return error.NoExtensionsAvailable;
+        }
 
         const instance = try self.vkb.createInstance(&.{
             .p_application_info = &.{
